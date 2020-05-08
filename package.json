@@ -1,0 +1,24 @@
+{
+  "name": "todo_list",
+  "version": "1.0.0",
+  "description": "program to list your tasks in very comfortable manner ",
+  "main": "index.js",
+  "scripts": {
+    "build" :  "webpack",
+    "start": "webpack-dev-server --open"   
+  },
+  "keywords": [
+    "todo",
+    "task"
+  ],
+  "author": "raman hryhoryk",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
