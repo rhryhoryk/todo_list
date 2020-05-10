@@ -9,6 +9,37 @@
 <body>
 
   <div class="app">
+
+    <!--task list template-->
+    <template id="taskList">
+      <ul class="taskList">
+        <h3 class="taskList__name">${listName}</h3>
+        <div class="group">
+          <button class="button button--new button--card">+ add another card</button>
+          <button class="button button--service button--delete">&#128465</button>
+        </div>
+      </ul>
+    </template>
+
+    <!--card template-->
+    <template id="card">
+      <li class="card">
+        <button class="button button--service button--edit">&#128394;</button>
+        <p class="card__text">${text}</p>
+      </li>
+    </template>
+
+    <!-- addNEW template -->
+    <template id="addNew">
+      <div class="group group--new">
+        <input type="text" name="new" id="newItem" class="input" placeholder="enter new ${addingType}...">
+        <div class="group group--buttons">
+          <button class="button button--add">add</button>
+          <button class="button button--service button--cancel">X</button>
+        </div>
+      </div>
+    </template>
+
     <button class="button button--new button--list">+ add another list</button>
   </div>
 
