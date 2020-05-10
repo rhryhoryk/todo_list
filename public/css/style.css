@@ -1,0 +1,204 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --grey:       #ebecef;
+  --darkgrey:   #424242;
+  --lightgrey:  #ffffff;
+  --blue:       #0d7dbe;
+  --darkblue:   #386f92;
+  --lightblue:  #489cd0;
+  --green:      #5eae3a;
+  --lighttext:  #7d868f;
+  --darktext:   #80838e;
+
+  --indent: 0.4vw;
+
+  font-family: calibri, monospace;
+  font-size: 15px;
+}
+
+body {
+  background-color: var(--blue);
+}
+
+ul, li{
+  list-style: none;
+}
+
+.app {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: var(--indent);
+}
+
+.taskList {
+  width: 18vw;
+  min-height: 5vw;
+  margin-right: var(--indent);
+  padding: var(--indent);
+  background-color: var(--grey);
+  border-radius: 0.25vw;
+}
+  .taskList__name {
+    margin-bottom: var(--indent);
+  }
+
+.card {
+  position: relative;
+  min-width: 98%;
+  min-height: 3vw;
+  margin-bottom: var(--indent);
+  padding: var(--indent);
+  background-color: var(--lightgrey);
+  border-radius: 0.25vw;
+}
+  .card__text {
+    font-size: 0.85rem;
+    line-height: 1rem;
+    text-align: justify;
+    color: var(--lighttext);
+  }
+
+.group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--indent);
+}
+  .group--new {
+    flex-wrap: wrap;
+  }
+  .group--buttons {
+    width: 50%;
+  }
+
+.button {
+  height: 2vw;
+  outline: none;
+  border: none;
+  border-radius: 0.25vw;
+  font-size: 1rem;
+  color: var(--grey);
+}
+.button:hover {
+  outline: none;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px var(--darkgrey);
+}
+.button:active {
+  outline: none;
+  box-shadow: 1px 1px 1px var(--lighttext);
+}
+
+.button--service {
+  width: 2vw;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.75rem;
+  color: var(--darktext);
+  background-color: transparent;
+}
+  .button--edit {float: right;}
+  /* .button--cancel { } */
+  /* .button--delete { } */
+
+
+.button--add {
+  width: 85%;
+  margin-right: var(--indent);
+  background-color: var(--green);
+}
+
+.button--new {
+  width: 15vw;
+  padding-left: 0.5vw;
+  text-align: left;
+}
+  .button--list {background-color: var(--lightblue)}
+  .button--card {background-color: var(--grey); color: var(--darkgrey)}
+
+.input {
+  width: 100%;
+  height: 2vw;
+  margin-bottom: var(--indent);
+  padding: var(--indent);
+  border: 1.5px solid var(--darkblue);
+  border-radius: 0.25vw;
+  color: var(--darktext);
+}
+
+@media (max-width: 950px) {
+  :root {
+    --indent: 0.6vw;
+    font-size: 12px;
+  }
+  .taskList {width: 25vw;}
+  .button {height: 3vw;}
+  .input {height: 3vw;}
+}
+
+@media (max-width: 800px) {
+  :root {font-size: 10px;}
+  .taskList {width: 30vw;}
+  .button {height: 4vw;}
+  .input {height: 4vw;}
+}
+
+@media (max-width: 770px) {
+  :root {
+    --indent: 1vw;
+    font-size: 17px;
+  }
+  .app {flex-direction: column;}
+
+  .taskList {
+    width: 95vw;
+    min-height: 15vw;
+    margin: var(--indent) auto;
+    border-radius: 0.6vw;
+  }
+    .taskList__name {margin-bottom: 2vw;}
+
+  .card {
+    min-height: 10vw;
+    border-radius: 0.6vw;
+  }
+    .card__text {
+      font-size: 1rem;
+      line-height: 1.2rem;
+    }
+ 
+  .group {margin-bottom: calc(var(--indent) + 0.5vw);}
+    .group--buttons {width: 80%;}
+  
+  .button {
+    height: 7vw;
+    border-radius: 0.6vw;
+  }
+
+  .button--service {
+    width: 7vw;
+    font-size: 1rem;
+  }
+  
+  .button--new {
+    width: 95vw;
+    padding-left: 1.5vw;
+  }
+    .button--list {margin: var(--indent) auto;}
+  
+  .input {height: 7vw;}
+}
+
+@media (max-width: 480px) {
+  :root {--indent: 1.2vw;}
+  .card {min-height: 12vw;}
+  .button {height: 9vw;}
+  .button--service {width: 9vw;}
+  .input {height: 9vw;}
+}
