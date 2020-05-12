@@ -72,6 +72,9 @@ ul, li{
 }
   .group--new {
     flex-wrap: wrap;
+    padding: var(--indent);
+    border-radius: 0.25vw;
+    background-color: var(--grey);
   }
   .group--buttons {
     width: 50%;
