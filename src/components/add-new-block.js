@@ -21,4 +21,12 @@ export default class AddNewBlock extends Component {
   getTemplate() {
     return createAddNewBlockTemplate(this._addingType);
   }
+
+  onAddbuttonClick (handler) {
+    this.getElement().querySelector(`.button--add`).addEventListener(`clock`, handler);
+  } 
+
+  onCancelButoonClick(handler) {
+    this.getElement().querySelector(`.button--cancel`).addEventListener(`click`, handler);
+  } 
 }

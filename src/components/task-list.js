@@ -21,5 +21,13 @@ export default class TaskList extends Component {
   getTemplate() {
     return createListTemplate(this._listName);
   }
+
+  onNewButtonClick(handler) {
+    this.getElement().querySelector(`.button--card`).addEventListener(`click`, handler);
+  }
+
+  onDeleteButoonClick(handler) {
+    this.getElement().querySelector(`.button--delete`).addEventListener(`click`, handler);
+  } 
 }
 
