@@ -4,10 +4,10 @@ const createListTemplate = (listName) => {
   return (
     `<ul class="taskList">
       <h3 class="taskList__name">${listName}</h3>
-      <div class="group">
+      <!-- <div class="group"> -->
         <button class="button button--new button--card">+ add another card</button>
-        <button class="button button--service button--delete">&#128465</button>
-      </div>
+      <!-- </div> -->
+      <button class="button button--service button--delete">&#128465</button>
     </ul>`
   )
 }
