@@ -18,4 +18,8 @@ export default class TaskCard extends Component {
   getTemplate() {
     return createCardTemplate(this._text)
   }
+
+  onEditButoonClick(handler) {
+    this.getElement().querySelector(`.button--edit`).addEventListener(`click`, handler);
+  } 
 }
