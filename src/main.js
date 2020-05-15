@@ -3,4 +3,6 @@ import NewButton from './components/new-button.js';
 import TaskCard from './components/task-card.js';
 import TaskList from './components/task-list.js';
 
+import {revomeNode} from './util.js';
+
 const app = document.querySelector(`.app`);
