@@ -3,7 +3,7 @@ import Component from './component.js';
 const createNewAddBlockTemplate = (addingType) => {
   return (
     `<div class="group group--new">
-      <input type="text" name="new" id="newItem" class="input" placeholder="enter new ${addingType}..." autocomplete="off">
+      <input type="text" name="new" id="newItem" class="input user-input" placeholder="enter new ${addingType}..." autocomplete="off">
       <div class="group group--buttons">
         <button class="button button--add" data-value="${addingType}">add</button>
         <button class="button button--service button--cancel" data-value="${addingType}">X</button>
