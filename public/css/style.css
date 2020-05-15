@@ -37,6 +37,7 @@ ul, li{
 }
 
 .taskList {
+  position: relative;
   width: 18vw;
   min-height: 5vw;
   margin-right: var(--indent);
@@ -108,7 +109,11 @@ ul, li{
 }
   .button--edit {float: right;}
   /* .button--cancel { } */
-  /* .button--delete { } */
+  .button--delete { 
+    position: absolute;
+    bottom: var(--indent);
+    right: var(--indent);
+  }
 
 
 .button--add {
