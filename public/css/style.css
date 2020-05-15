@@ -80,6 +80,9 @@ ul, li{
   .group--buttons {
     width: 50%;
   }
+  .group--edit {
+    background-color: var(--lightgrey);
+  }
 
 .button {
   height: 2vw;
@@ -138,6 +141,13 @@ ul, li{
   border: 1.5px solid var(--darkblue);
   border-radius: 0.25vw;
   color: var(--darktext);
+}
+
+.edit-textarea {
+  margin-bottom: var(--indent);
+  padding: var(--indent);
+  outline: none;
+  resize: none;
 }
 
 @media (max-width: 950px) {
