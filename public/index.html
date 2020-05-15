@@ -29,13 +29,13 @@
       </li>
     </template>
 
-    <!-- addNEW template -->
+    <!-- new-add-block template -->
     <template id="addNew">
       <div class="group group--new">
-        <input type="text" name="new" id="newItem" class="input" placeholder="enter new ${addingType}...">
+        <input type="text" name="new" id="newItem" class="input" placeholder="enter new ${addingType}..." autocomplete="off">
         <div class="group group--buttons">
-          <button class="button button--add">add</button>
-          <button class="button button--service button--cancel">X</button>
+          <button class="button button--add" data-value="${addingType}">add</button>
+          <button class="button button--service button--cancel" data-value="${addingType}">X</button>
         </div>
       </div>
     </template>
