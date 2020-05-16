@@ -52,7 +52,7 @@ const renderTaskPart = (evt) => {
   const taskPart = new classFROM(userInput);
   if (classFROM === TaskList) {
     taskPart.onNewButtonClick(renderNewAddBlock)
-    taskPart.onDeleteButoonClick(deleteList)
+    taskPart.onDeleteButoonClick(deleteTaskPart)
   } else {
     taskPart.onEditButoonClick(editCard)
   }
@@ -69,6 +69,14 @@ const deleteList = () => {
   revomeNode(`.taskList`);
 };
 
+const deleteTaskPart = (evt) => {
+  let deletingElement = `.taskList`;
+  if (evt.target.classList.contains(`button--editdelete`)) {
+    deletingElement = `.group--edit`;
+  }
+  revomeNode(deletingElement);
+}
+
 // ----------------------------edit card logic--------------------------------
 
 const editCard = () => {
@@ -81,7 +89,8 @@ const renderEditBlock = (cardText) => {
   const editBlock = new EditBlock(`card-text`);
   editBlock.onEditButtonClick(editing);
   editBlock.onEditCancelButtonClick(editing);
-  const editBlockElement = editBlock.getElement()
+  editBlock.onEditDeleteButtonClick(deleteTaskPart);
+  const editBlockElement = editBlock.getElement();
   editBlockElement.querySelector(`.edit-textarea`).textContent = cardText;
   document.querySelector(`.button--card`).before(editBlockElement)
 }
