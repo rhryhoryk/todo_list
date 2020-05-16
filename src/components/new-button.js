@@ -2,7 +2,7 @@ import Component from './component.js';
 
 const createNewListButtonTemplate = (type) => {
   return (
-    `<button class="button button--new button--${type}">+ add another list</button>`
+    `<button class="button button--new button--${type}">+ add another ${type}</button>`
   )
 };
 
