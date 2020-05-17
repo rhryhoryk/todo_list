@@ -1,23 +1,19 @@
 import Component from './component.js';
 
-const createEditBlockTemplate = (addingType) => {
+const createEditBlockTemplate = () => {
   return (
     `<div class="group group--new group--edit">
-      <textarea name="" id="" cols="30" rows="5" class="edit-textarea user-input"></textarea>
+      <textarea name="" id="" cols="30" rows="5" class="edit-textarea user-input" placeholder="enter your task..."></textarea>
       <div class="group group--buttons">
-        <button class="button button--add button--edit" data-value="${addingType}">edit</button>
-        <button class="button button--service button--cancel button--editcancel" data-value="${addingType}">X</button>
+        <button class="button button--add button--edit">edit</button>
+        <button class="button button--service button--cancel button--editcancel">X</button>
         <button class="button button--service button--editdelete">&#128465</button>
       </div>
     </div>`
   )
 };
 
-export default class EditBlock extends Component {
-  constructor(addingType) {
-    super();
-    this._addingType = addingType;
-  }
+export default class CardBlock extends Component {
 
   getTemplate() {
     return createEditBlockTemplate(this._addingType);
