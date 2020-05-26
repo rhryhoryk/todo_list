@@ -93,7 +93,7 @@ ul, li{
   font-size: 1rem;
   color: var(--grey);
 }
-.button:hover {
+.button:hover, .button:focus {
   outline: none;
   cursor: pointer;
   box-shadow: 2px 2px 5px var(--darkgrey);
@@ -142,6 +142,11 @@ ul, li{
   border: 1.5px solid var(--darkblue);
   border-radius: 0.25vw;
   color: var(--darktext);
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: 1px 1px 4px var(--darkgrey);
 }
 
 .edit-textarea {
