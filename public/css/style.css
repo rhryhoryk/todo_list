@@ -74,6 +74,7 @@ ul, li{
   .group--new {
     flex-wrap: wrap;
     padding: var(--indent);
+    margin-left: var(--indent);
     border-radius: 0.25vw;
     background-color: var(--grey);
   }
@@ -130,7 +131,7 @@ ul, li{
   padding-left: 0.5vw;
   text-align: left;
 }
-  .button--list {background-color: var(--lightblue)}
+  .button--list {background-color: var(--lightblue); margin-left: var(--indent);}
   .button--card {background-color: var(--grey); color: var(--darkgrey)}
 
 .input {

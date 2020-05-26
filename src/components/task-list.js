@@ -1,25 +1,23 @@
 import Component from './component.js';
 
-const createListTemplate = (listName) => {
+const createListTemplate = (listName, index) => {
   return (
-    `<ul class="taskList">
+    `<ul class="taskList" id="${index}">
       <h3 class="taskList__name">${listName}</h3>
-      <!-- <div class="group"> -->
-        <button class="button button--new button--card">+ add another card</button>
-      <!-- </div> -->
       <button class="button button--service button--delete">&#128465</button>
     </ul>`
   )
 }
 
 export default class TaskList extends Component {
-  constructor(listName) {
+  constructor(index, listName) {
     super()
+    this._index = index;
     this._listName = listName;
   }
 
   getTemplate() {
-    return createListTemplate(this._listName);
+    return createListTemplate(this._listName, this._index);
   }
 
   onNewButtonClick(handler) {

@@ -1,12 +1,16 @@
-import {NEWButtonMaker, app} from './controllers/add--new--button--maker.js';
+
+import BoardController from './controllers/board--controller.js'
 
 class App {
-  constructor() {}
+  constructor() {
+    this.board = new BoardController();
+  }
 
   start () {
-    const button = new NEWButtonMaker();
-    button.renderNewButton(`list`, app)
+    this.board.start();
+    // localStorage.clear();
   }
+
 }
 
 const application = new App();

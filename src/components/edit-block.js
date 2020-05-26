@@ -1,9 +1,9 @@
 import Component from './component.js';
 
-const createEditBlockTemplate = () => {
+const createEditBlockTemplate = (cardID, previousInput) => {
   return (
-    `<div class="group group--new group--edit">
-      <textarea name="" id="" cols="30" rows="5" class="edit-textarea user-input" placeholder="enter your task..."></textarea>
+    `<div class="group group--new group--edit" data-value="cardID--${cardID}">
+      <textarea name="" id="" cols="30" rows="5" class="edit-textarea user-card-input" placeholder="enter your task...">${previousInput}</textarea>
       <div class="group group--buttons">
         <button class="button button--add button--edit">edit</button>
         <button class="button button--service button--cancel button--editcancel">X</button>
@@ -13,10 +13,15 @@ const createEditBlockTemplate = () => {
   )
 };
 
-export default class CardBlock extends Component {
+export default class EditBlock extends Component {
+  constructor(cardID, previousInput) {
+    super();
+    this._previousInput = previousInput;
+    this._cardID = cardID;
+  }
 
   getTemplate() {
-    return createEditBlockTemplate(this._addingType);
+    return createEditBlockTemplate(this._cardID, this._previousInput);
   }
 
   onEditButtonClick(handler) {

@@ -8,55 +8,51 @@
 </head>
 <body>
 
-  <div class="app">
+  <div class="app"></div>
 
-    <!--task list template-->
-    <template id="taskList">
-      <ul class="taskList">
-        <h3 class="taskList__name">${listName}</h3>
-        <!-- <div class="group"> -->
-          <button class="button button--new button--card">+ add another card</button>
-        <!-- </div> -->
-        <button class="button button--service button--delete">&#128465</button>
-      </ul>
-    </template>
+   <!--task list template-->
+   <template id="taskList">
+    <ul class="taskList" id="${index}">
+      <h3 class="taskList__name">${listName}</h3>
+      <button class="button button--service button--delete">&#128465</button>
+    </ul>
+  </template>
 
-    <!--card template-->
-    <template id="card">
-      <li class="card">
-        <button class="button button--service button--edit">&#128394;</button>
-        <p class="card__text">${text}</p>
-      </li>
-    </template>
+  <!--card template-->
+  <template id="taskcard">
+    <li class="card" id="${index}">
+      <button class="button button--service button--edit">&#128394;</button>
+      <p class="card__text">${text}</p>
+    </li>
+  </template>
 
-    <!-- new-add-block template -->
-    <template id="addNew">
-      <div class="group group--new">
-        <input type="text" name="new" id="newItem" class="input" placeholder="enter new ${addingType}..." autocomplete="off">
-        <div class="group group--buttons">
-          <button class="button button--add" data-value="${addingType}">add</button>
-          <button class="button button--service button--cancel" data-value="${addingType}">X</button>
-        </div>
+  <!-- list-block template -->
+  <template id="listBlock">
+    <div class="group group--new group--list" data-value="listID--${listID}">
+      <input type="text" name="new" id="newItem" class="input user-list-input" placeholder="enter new list name..." autocomplete="off">
+      <div class="group group--buttons">
+        <button class="button button--add">add</button>
+        <button class="button button--service button--cancel">X</button>
       </div>
-    </template>
+    </div>
+  </template>
 
-    <!-- edit-block template -->
-    <template id="editBlock">
-      <div class="group group--new group--edit">
-        <textarea name="" id="" cols="30" rows="5" class="edit-textarea"></textarea>
-        <div class="group group--buttons">
-          <button class="button button--add" data-value="${addingType}">edit</button>
-          <button class="button button--service button--cancel" data-value="${addingType}">X</button>
-        </div>
+  <!-- edit-block template -->
+  <template id="editBlock">
+    <div class="group group--new group--edit" data-value="cardID--${cardID}">
+      <textarea name="" id="" cols="30" rows="5" class="edit-textarea user-card-input" placeholder="enter your task...">${previousInput}</textarea>
+      <div class="group group--buttons">
+        <button class="button button--add button--edit">edit</button>
+        <button class="button button--service button--cancel button--editcancel">X</button>
+        <button class="button button--service button--editdelete">&#128465</button>
       </div>
-    </template>
+    </div>
+  </template>
 
-    <!-- main blue button template -->
-    <template id="mainButton">
-      <button class="button button--new button--list">+ add another list</button>
-    </template>
-
-  </div>
+  <!-- main blue button template -->
+  <template id="mainButton">
+    <button class="button button--new button--${type}">+ add another ${type}</button>
+  </template>
 
   <script src="bundle.js"></script>
 </body>

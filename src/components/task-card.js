@@ -1,8 +1,8 @@
 import Component from './component.js';
 
-const createCardTemplate = (text) => {
+const createCardTemplate = (index, text) => {
   return (
-    `<li class="card">
+    `<li class="card" id="${index}">
       <button class="button button--service button--edit">&#128394;</button>
       <p class="card__text">${text}</p>
     </li>`
@@ -10,13 +10,14 @@ const createCardTemplate = (text) => {
 }
 
 export default class TaskCard extends Component {
-  constructor(text) {
+  constructor(index, text) {
     super();
+    this._index = index;
     this._text = text;
   }
 
   getTemplate() {
-    return createCardTemplate(this._text)
+    return createCardTemplate(this._index, this._text)
   }
 
   onEditButoonClick(handler) {
