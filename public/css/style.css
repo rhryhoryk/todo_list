@@ -29,6 +29,10 @@ ul, li{
   list-style: none;
 }
 
+h3:hover {
+  cursor: pointer;
+}
+
 .app {
   display: flex;
   flex-direction: row;
@@ -39,11 +43,13 @@ ul, li{
 .taskList {
   position: relative;
   width: 18vw;
+  right: 0px;
   min-height: 5vw;
   margin-right: var(--indent);
   padding: var(--indent);
   background-color: var(--grey);
   border-radius: 0.25vw;
+  z-index: 0;
 }
   .taskList__name {
     margin-bottom: var(--indent);

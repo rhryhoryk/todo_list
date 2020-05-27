@@ -27,5 +27,9 @@ export default class TaskList extends Component {
   onDeleteButoonClick(handler) {
     this.getElement().querySelector(`.button--delete`).addEventListener(`click`, handler);
   } 
+  
+  onHeadingMouseMove(handler) {
+    this.getElement().querySelector(`.taskList__name`).addEventListener(`mousedown`, handler);
+  }
 }
 

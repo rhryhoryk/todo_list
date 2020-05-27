@@ -70,8 +70,53 @@ export default class BoardController {
         listdata.deleteListFormLocalDATA();
         --this._listAmount
       })
-    app.insertBefore(list.getElement(), this._newButton.getElement());
 
+      list.onHeadingMouseMove((evt) => {
+        evt.preventDefault();
+        const userCoordinate = evt.clientX;
+        list.getElement().style.zIndex = `1`;
+
+        const onmousemove = (moveEVT) => {
+          const shift = userCoordinate - moveEVT.clientX;
+          list.getElement().style.right = `${shift}px`;
+        }
+
+        const onmouseup = (upEVT) => {
+          const direction = list.getElement().style.right.slice(0, -2);
+          const listsArr = Array.from(upEVT.currentTarget.parentElement.querySelectorAll(`.taskList`));
+          const index = listsArr.findIndex(listEl => listEl.id == upEVT.currentTarget.id);
+          const lists = upEVT.currentTarget.parentElement.querySelectorAll(`.taskList`);
+
+          if (direction <= 0) {
+            if (direction <= 0 && direction >= -50) {
+              list.getElement().style.right = `0px`
+            } else {
+              if (lists.length - 1 === index ) {
+                list.getElement().style.right = `0px`
+              } else {
+                const replaced = app.replaceChild(lists[index], lists[index + 1])
+                app.insertBefore(replaced, lists[index])
+                list.getElement().style.right = `0px`
+              }
+            }
+          } else {
+            if (direction >= 0 && direction < 50) {
+              list.getElement().style.right = `0px`
+            } else {
+              const replaced = app.replaceChild(lists[index], lists[index - 1])
+              lists[index].after(replaced)
+              list.getElement().style.right = `0px`
+            }
+          }
+          list.getElement().style.zIndex = `0`;
+          list.getElement().removeEventListener(`mousemove`, onmousemove);
+          list.getElement().removeEventListener(`mouseup`, onmouseup)
+        }
+        list.getElement().addEventListener(`mousemove`, onmousemove);
+        list.getElement().addEventListener(`mouseup`, onmouseup)
+      })
+
+    app.insertBefore(list.getElement(), this._newButton.getElement());
     const listController = new ListController(list.getElement(), listdata);
     listController.render();
   }
