@@ -221,8 +221,15 @@ h3:hover {
     padding-left: 1.5vw;
   }
     .button--list {margin: var(--indent) auto;}
+    .button--card {
+      width: 85vw;
+      margin: var(--indent) auto;}
   
   .input {height: 7vw;}
+      .user-card-input, .user-list-input {
+        width: 92vw;
+        margin: var(--indent) auto;
+      }
 }
 
 @media (max-width: 480px) {
@@ -230,5 +237,6 @@ h3:hover {
   .card {min-height: 12vw;}
   .button {height: 9vw;}
   .button--service {width: 9vw;}
+  .button--card {width: 75vw;}
   .input {height: 9vw;}
 }
