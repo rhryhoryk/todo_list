@@ -1,4 +1,4 @@
-import Component from './component.js';
+import Component from './component';
 
 const createCardTemplate = (index, text) => {
   return (
@@ -6,8 +6,8 @@ const createCardTemplate = (index, text) => {
       <button class="button button--service button--edit">&#128394;</button>
       <p class="card__text">${text}</p>
     </li>`
-  )
-}
+  );
+};
 
 export default class TaskCard extends Component {
   constructor(index, text) {
@@ -17,10 +17,10 @@ export default class TaskCard extends Component {
   }
 
   getTemplate() {
-    return createCardTemplate(this._index, this._text)
+    return createCardTemplate(this._index, this._text);
   }
 
   onEditButoonClick(handler) {
     this.getElement().querySelector(`.button--edit`).addEventListener(`click`, handler);
-  } 
+  }
 }

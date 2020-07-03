@@ -1,9 +1,9 @@
-import Component from './component.js';
+import Component from './component';
 
 const createNewListButtonTemplate = (type) => {
   return (
     `<button class="button button--new button--${type}">+ add another ${type}</button>`
-  )
+  );
 };
 
 export default class NewButton extends Component {

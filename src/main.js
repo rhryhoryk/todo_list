@@ -1,16 +1,15 @@
 
-import BoardController from './controllers/board--controller.js'
+import BoardController from './controllers/board--controller';
 
 class App {
   constructor() {
     this.board = new BoardController();
   }
 
-  start () {
+  start() {
     this.board.start();
     // localStorage.clear();
   }
-
 }
 
 const application = new App();

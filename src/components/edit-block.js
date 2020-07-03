@@ -1,4 +1,4 @@
-import Component from './component.js';
+import Component from './component';
 
 const createEditBlockTemplate = (cardID, previousInput) => {
   return (
@@ -10,7 +10,7 @@ const createEditBlockTemplate = (cardID, previousInput) => {
         <button class="button button--service button--editdelete">&#128465</button>
       </div>
     </div>`
-  )
+  );
 };
 
 export default class EditBlock extends Component {
@@ -26,7 +26,7 @@ export default class EditBlock extends Component {
 
   onEditButtonClick(handler) {
     this.getElement().querySelector(`.button--edit`).addEventListener(`click`, handler);
-  };
+  }
 
   onEditCancelButtonClick(handler) {
     this.getElement().querySelector(`.button--editcancel`).addEventListener(`click`, handler);

@@ -1,4 +1,4 @@
-import Component from './component.js';
+import Component from './component';
 
 const createNewAddBlockTemplate = (listID) => {
   return (
@@ -9,8 +9,8 @@ const createNewAddBlockTemplate = (listID) => {
         <button class="button button--service button--cancel">X</button>
       </div>
     </div>`
-  )
-}
+  );
+};
 
 export default class ListBlock extends Component {
   constructor(listID) {
@@ -24,9 +24,9 @@ export default class ListBlock extends Component {
 
   onAddbuttonClick(handler) {
     this.getElement().querySelector(`.button--add`).addEventListener(`click`, handler);
-  } 
+  }
 
   onCancelButoonClick(handler) {
     this.getElement().querySelector(`.button--cancel`).addEventListener(`click`, handler);
-  } 
+  }
 }

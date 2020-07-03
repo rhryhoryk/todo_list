@@ -1,0 +1,22 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "extends": "airbnb",
+    "rules": {
+        "linebreak-style": ["error", "windows"],
+        "quotes": ["error", "backtick"],
+        "no-param-reassign": "off",
+        "no-underscore-dangle": "off",
+        "no-continue": "off",
+        "react/sort-comp": "off",
+        "arrow-body-style": "off",
+        "prefer-destructuring": "off",
+        "class-methods-use-this": "off"
+    }
+}

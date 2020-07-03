@@ -5,16 +5,16 @@ export default class ListModel {
     this.cardAmount = cardAmount;
     this.cards = cards;
 
-    this.keyName = `${this.h3}--list`
+    this.keyName = `${this.h3}--list`;
   }
 
   createListInLocalDATA() {
     const obj = {
-      listID: this.listID, 
-      h3: this.h3, 
-      cardAmount: this.cardAmount, 
-      cards: this.cards
-    }
+      listID: this.listID,
+      h3: this.h3,
+      cardAmount: this.cardAmount,
+      cards: this.cards,
+    };
     localStorage.setItem(this.keyName, JSON.stringify(obj));
   }
 
@@ -23,30 +23,30 @@ export default class ListModel {
   }
 
   editCardInlocalDATA(cardID, userInput) {
-    const obj = this._getObjFromLocalData()
-    const realIndex = obj.cards.findIndex(card => card.cardID == cardID)
+    const obj = this._getObjFromLocalData();
+    const realIndex = obj.cards.findIndex((card) => card.cardID === cardID);
 
     if (realIndex > -1) {
       obj.cards[realIndex].cardText = userInput;
     } else {
-      obj.cards.push({cardID: cardID, cardText: userInput});
-      obj.cardAmount =  obj.cardAmount + 1;
+      obj.cards.push({ cardID, cardText: userInput });
+      obj.cardAmount += 1;
     }
 
-    this.cards = obj.cards
+    this.cards = obj.cards;
     localStorage.setItem(this.keyName, JSON.stringify(obj));
   }
 
   deleteCardFromLocalDATA(cardID) {
     const obj = this._getObjFromLocalData();
-    const realIndex = obj.cards.findIndex(card => card.cardID == cardID)
+    const realIndex = obj.cards.findIndex((card) => card.cardID === cardID);
     obj.cards.splice(realIndex, 1);
-    obj.cardAmount =  obj.cardAmount - 1;
+    obj.cardAmount -= 1;
     this.cards = obj.cards;
     localStorage.setItem(this.keyName, JSON.stringify(obj));
   }
 
   _getObjFromLocalData() {
-    return JSON.parse(localStorage.getItem(this.keyName))
+    return JSON.parse(localStorage.getItem(this.keyName));
   }
 }
