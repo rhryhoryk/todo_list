@@ -32,9 +32,6 @@ export default class Util {
   }
 
   static _isIndexLegal(arr, index) {
-    if (arr.findIndex((el) => el.id === index) > -1) {
-      return false;
-    }
-    return true;
+    return !!arr.find((el) => el.id === index);
   }
 }
