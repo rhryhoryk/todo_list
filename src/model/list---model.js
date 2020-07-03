@@ -5,7 +5,8 @@ export default class ListModel {
     this.cardAmount = cardAmount;
     this.cards = cards;
 
-    this.keyName = `${this.h3}--list`;
+    // this.keyName = `${this.h3}--list`;
+    this.keyName = `${this.listID}--list`;
   }
 
   createListInLocalDATA() {

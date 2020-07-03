@@ -71,17 +71,27 @@ export default class BoardController {
       this._listAmount -= 1;
     });
 
+    list.onInputChange((evtChange) => {
+      listdata.h3 = evtChange.target.value;
+      const listID = evtChange.target.parentElement.id;
+      const listInStorage = JSON.parse(localStorage.getItem(`${listID}--list`));
+      localStorage.removeItem(`${listID}--list`);
+      listInStorage.h3 = evtChange.target.value;
+      localStorage.setItem(`${listID}--list`, JSON.stringify(listInStorage));
+    });
+
     list.onHeadingMouseMove((evt) => {
-      evt.preventDefault();
       const userCoordinate = evt.clientX;
       list.getElement().style.zIndex = `1`;
 
       const onmousemove = (moveEVT) => {
+        moveEVT.preventDefault();
         const shift = userCoordinate - moveEVT.clientX;
         list.getElement().style.right = `${shift}px`;
       };
 
       const onmouseup = (upEVT) => {
+        upEVT.preventDefault();
         const direction = list.getElement().style.right.slice(0, -2);
         const listsArr = Array.from(upEVT.currentTarget.parentElement.querySelectorAll(`.taskList`));
         const index = listsArr.findIndex((listEl) => listEl.id === upEVT.currentTarget.id);
@@ -115,6 +125,7 @@ export default class BoardController {
         list.getElement().removeEventListener(`mousemove`, onmousemove);
         list.getElement().removeEventListener(`mouseup`, onmouseup);
       };
+
       list.getElement().addEventListener(`mousemove`, onmousemove);
       list.getElement().addEventListener(`mouseup`, onmouseup);
     });

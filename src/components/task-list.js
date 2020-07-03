@@ -3,7 +3,7 @@ import Component from './component';
 const createListTemplate = (listName, index) => {
   return (
     `<ul class="taskList" id="${index}">
-      <h3 class="taskList__name">${listName}</h3>
+      <input class="taskList__name" value="${listName}" autocomplete="off">
       <button class="button button--service button--delete">&#128465</button>
     </ul>`
   );
@@ -30,5 +30,9 @@ export default class TaskList extends Component {
 
   onHeadingMouseMove(handler) {
     this.getElement().querySelector(`.taskList__name`).addEventListener(`mousedown`, handler);
+  }
+
+  onInputChange(handler) {
+    this.getElement().querySelector(`.taskList__name`).addEventListener(`change`, handler);
   }
 }
