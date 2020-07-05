@@ -78,6 +78,10 @@ export default class ListController {
       this._createBlock(cardID, innerText);
     });
 
+    card.onMouseDown((evtdown) => {
+      Util.moveElement(evtdown, card, this._listElement);
+    });
+
     this._resetBlock();
     this._cardAmount += 1;
     this._listElement.insertBefore(card.getElement(), this._listElement.lastChild);

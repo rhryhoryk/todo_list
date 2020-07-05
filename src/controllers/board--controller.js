@@ -81,53 +81,7 @@ export default class BoardController {
     });
 
     list.onHeadingMouseMove((evt) => {
-      const userCoordinate = evt.clientX;
-      list.getElement().style.zIndex = `1`;
-
-      const onmousemove = (moveEVT) => {
-        moveEVT.preventDefault();
-        const shift = userCoordinate - moveEVT.clientX;
-        list.getElement().style.right = `${shift}px`;
-      };
-
-      const onmouseup = (upEVT) => {
-        upEVT.preventDefault();
-        const direction = list.getElement().style.right.slice(0, -2);
-        const listsArr = Array.from(upEVT.currentTarget.parentElement.querySelectorAll(`.taskList`));
-        const index = listsArr.findIndex((listEl) => listEl.id === upEVT.currentTarget.id);
-        const lists = upEVT.currentTarget.parentElement.querySelectorAll(`.taskList`);
-
-        const isLast = () => {
-          return lists.length - 1 === index;
-        };
-
-        if (direction <= 0) {
-          if (direction >= -50 || isLast()) {
-            list.getElement().style.right = `0px`;
-          } else {
-            const replaced = app.replaceChild(lists[index], lists[index + 1]);
-            app.insertBefore(replaced, lists[index]);
-            list.getElement().style.right = `0px`;
-          }
-        }
-
-        if (direction > 0) {
-          if (direction < 50) {
-            list.getElement().style.right = `0px`;
-          } else {
-            const replaced = app.replaceChild(lists[index], lists[index - 1]);
-            lists[index].after(replaced);
-            list.getElement().style.right = `0px`;
-          }
-        }
-
-        list.getElement().style.zIndex = `0`;
-        list.getElement().removeEventListener(`mousemove`, onmousemove);
-        list.getElement().removeEventListener(`mouseup`, onmouseup);
-      };
-
-      list.getElement().addEventListener(`mousemove`, onmousemove);
-      list.getElement().addEventListener(`mouseup`, onmouseup);
+      Util.moveElement(evt, list, app);
     });
 
     app.insertBefore(list.getElement(), this._newButton.getElement());

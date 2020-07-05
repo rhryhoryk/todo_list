@@ -23,4 +23,8 @@ export default class TaskCard extends Component {
   onEditButoonClick(handler) {
     this.getElement().querySelector(`.button--edit`).addEventListener(`click`, handler);
   }
+
+  onMouseDown(handler) {
+    this.getElement().addEventListener(`mousedown`, handler);
+  }
 }
