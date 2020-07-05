@@ -40,7 +40,11 @@ export default class ListController {
     const block = new EditBlock(cardID, previousInput);
     block.onEditButtonClick(() => {
       const userInput = Util.getUserInput(this._listElement, `.user-card-input`);
-      this._createCard(cardID, userInput);
+      if (!userInput) {
+        this._resetBlock();
+      } else {
+        this._createCard(cardID, userInput);
+      }
     });
 
     block.onEditCancelButtonClick(() => {
