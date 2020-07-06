@@ -24,6 +24,9 @@ export default class ListController {
         card.getElement().remove();
         this._createBlock(cardData.cardID, innerText);
       });
+      card.onMouseDown((evtdown) => {
+        Util.moveElement(evtdown, card, this._listElement);
+      });
       this._listElement.insertBefore(card.getElement(), this._listElement.lastChild);
     });
   }
