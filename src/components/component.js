@@ -4,7 +4,7 @@ export default class Component {
   }
 
   getTemplate() {
-    throw new Error(`not on abstract class`)
+    throw new Error(`not on abstract class`);
   }
 
   createElement(template) {
@@ -15,7 +15,7 @@ export default class Component {
 
   getElement() {
     if (!this._element) {
-      this._element = this.createElement(this.getTemplate())
+      this._element = this.createElement(this.getTemplate());
     }
     return this._element;
   }

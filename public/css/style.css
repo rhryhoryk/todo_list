@@ -29,9 +29,6 @@ ul, li{
   list-style: none;
 }
 
-h3:hover {
-  cursor: pointer;
-}
 
 .app {
   display: flex;
@@ -52,7 +49,15 @@ h3:hover {
   z-index: 0;
 }
   .taskList__name {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    padding: calc(var(--indent)/2);
     margin-bottom: var(--indent);
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    background-color: var(--grey)
   }
 
 .card {
@@ -63,6 +68,8 @@ h3:hover {
   padding: var(--indent);
   background-color: var(--lightgrey);
   border-radius: 0.25vw;
+  word-wrap: break-word;
+  white-space: pre-line;
 }
   .card__text {
     font-size: 0.85rem;
@@ -113,7 +120,9 @@ h3:hover {
   width: 2vw;
   text-align: center;
   font-weight: bold;
-  font-size: 0.75rem;
+  /* font-size: 0.75rem; */
+  font-size: 1rem;
+
   color: var(--darktext);
   background-color: transparent;
 }
