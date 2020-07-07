@@ -2,7 +2,7 @@ import Component from './component';
 
 const createCardTemplate = (index, text) => {
   return (
-    `<li class="card" id="${index}">
+    `<li class="card card--${index}" id="${index}">
       <button class="button button--service button--edit">&#128394;</button>
       <p class="card__text">${text}</p>
     </li>`

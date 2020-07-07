@@ -11,6 +11,7 @@ export default class BoardController {
   constructor() {
     this._newButton = new NewButton(`list`);
     this._listAmount = localStorage.length;
+    this._listArr = [];
   }
 
   start() {
@@ -21,14 +22,14 @@ export default class BoardController {
   _renderNewButton() {
     this._newButton.onNewButtonClick(() => {
       Util.hideButton(this._newButton.getElement());
-      const existedLists = Array.from(app.querySelectorAll(`.taskList`));
-      const listID = Util.setIndex(existedLists, this._listAmount);
+      const listID = Util.setIndex(this._listArr.length);
       this._createBlock(listID);
     });
     app.append(this._newButton.getElement());
   }
 
   _renderStorage() {
+    const listArr = [];
     for (let i = 0; i < localStorage.length; i += 1) {
       const key = localStorage.key(i);
       if (key.indexOf(`--list`) !== -1) {
@@ -39,23 +40,35 @@ export default class BoardController {
         const cards = obj.cards;
 
         const objModel = new ListModel(listID, head, cardAmount, cards);
-        this._createNewList(objModel);
-
-        const list = document.getElementById(listID);
-        this._createCards(list, objModel);
+        listArr.push(objModel);
       } else { continue; }
     }
+
+    listArr.sort((a, b) => {
+      return a.listID - b.listID;
+    });
+
+    this._listArr = listArr;
+
+    listArr.forEach((el) => {
+      this._createNewList(el);
+    });
   }
 
   _createBlock(listID) {
     const block = new ListBlock(listID);
     block.onAddbuttonClick(() => {
       const userInput = Util.getUserInput(document, `.user-list-input`);
-      const listdata = new ListModel(listID, userInput, 0, []);
-      listdata.createListInLocalDATA();
-      this._createNewList(listdata);
-      this._resetBlock();
-      this._listAmount += 1;
+      if (!userInput) {
+        this._resetBlock();
+      } else {
+        const listdata = new ListModel(listID, userInput, 0, []);
+        this._listArr.push(listdata);
+        listdata.createListInLocalDATA();
+        this._createNewList(listdata);
+        this._resetBlock();
+        this._listAmount += 1;
+      }
     });
     block.onCancelButoonClick(() => {
       this._resetBlock();
@@ -67,7 +80,11 @@ export default class BoardController {
     const list = new TaskList(listdata.listID, listdata.h3);
     list.onDeleteButoonClick(() => {
       document.getElementById(listdata.listID).remove();
+      this._listArr.splice(listdata.listID, 1);
+      Util.resetIndex(this._listArr);
       listdata.deleteListFormLocalDATA();
+      Util.resetListStorage(this._listArr);
+      Util.resetNodeIndex(document.querySelectorAll(`.taskList`));
       this._listAmount -= 1;
     });
 
@@ -81,17 +98,12 @@ export default class BoardController {
     });
 
     list.onHeadingMouseMove((evt) => {
-      Util.moveElement(evt, list, app);
+      Util.moveElement(evt, list, app, this._listArr);
     });
 
     app.insertBefore(list.getElement(), this._newButton.getElement());
     const listController = new ListController(list.getElement(), listdata);
     listController.render();
-  }
-
-  _createCards(parent, data) {
-    const listController = new ListController(parent, data);
-    listController.renderCards();
   }
 
   _resetBlock() {

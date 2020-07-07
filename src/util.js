@@ -25,22 +25,53 @@ export default class Util {
     return parent.querySelector(selector).textContent;
   }
 
-  static setIndex(arr, index) {
-    if (!this._isIndexLegal(arr, index)) {
-      index -= 1;
-      this.setIndex(arr, index);
+  static setIndex(length) {
+    let index;
+    if (!length) {
+      index = 0;
+    } else {
+      index = length;
     }
     return index;
   }
 
-  static _isIndexLegal(arr, index) {
-    if (arr.findIndex((el) => el.id === index) > -1) {
-      return false;
-    }
-    return true;
+  static resetIndex(arr) {
+    arr.forEach((el, index) => {
+      if (el.listID) {
+        el.listID = index;
+      } else {
+        el.cardID = index;
+      }
+    });
   }
 
-  static moveElement(evtdown, element, parent) {
+  static resetListStorage(arr) {
+    localStorage.clear();
+    arr.forEach((el) => {
+      const obj = {
+        listID: el.listID,
+        h3: el.h3,
+        cardAmount: el.cardAmount,
+        cards: el.cards,
+      };
+      const keyName = `${obj.listID}--list`;
+      localStorage.setItem(keyName, JSON.stringify(obj));
+    });
+  }
+
+  static resetCardStorage(listID, arr) {
+    const obj = JSON.parse(localStorage.getItem(`${listID}--list`));
+    obj.cards = arr;
+    localStorage.setItem(`${listID}--list`, JSON.stringify(obj));
+  }
+
+  static resetNodeIndex(col) {
+    for (let i = 0; i < col.length; i += 1) {
+      col[i].id = i;
+    }
+  }
+
+  static moveElement(evtdown, element, parent, dataArr) {
     let coordinate;
     if (element instanceof TaskList) {
       coordinate = evtdown.clientX;
@@ -92,6 +123,14 @@ export default class Util {
         }
       };
 
+      const changeStorage = (listID) => {
+        if (element instanceof TaskList) {
+          this.resetListStorage(dataArr);
+        } else {
+          this.resetCardStorage(listID, dataArr);
+        }
+      };
+
       const isFirst = () => {
         return element.getElement().id === `0`;
       };
@@ -106,6 +145,12 @@ export default class Util {
         } else {
           const replaced = parent.replaceChild(elements[index], elements[index + 1]);
           parent.insertBefore(replaced, elements[index]);
+          [elements[index].id, elements[index + 1].id] = [elements[index + 1].id, elements[index].id];
+          [dataArr[index], dataArr[index + 1]] = [dataArr[index + 1], dataArr[index]];
+          // ? ресет индекс проблема с нулем
+          this.resetIndex(dataArr);
+          const parentID = elements[index].parentElement.id;
+          changeStorage(parentID);
           toZero();
         }
       }
@@ -116,6 +161,12 @@ export default class Util {
         } else {
           const replaced = parent.replaceChild(elements[index], elements[index - 1]);
           elements[index].after(replaced);
+          [elements[index].id, elements[index - 1].id] = [elements[index - 1].id, elements[index].id];
+          [dataArr[index], dataArr[index - 1]] = [dataArr[index - 1], dataArr[index]];
+          // ? ресет индекс проблема с нулем
+          this.resetIndex(dataArr);
+          const parentID = elements[index].parentElement.id;
+          changeStorage(parentID);
           toZero();
         }
       }

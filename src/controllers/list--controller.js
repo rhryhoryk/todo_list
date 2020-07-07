@@ -10,14 +10,25 @@ export default class ListController {
     this._listElement = listElement;
     this._listData = listData;
     this._cardAmount = this._listData.cardAmount;
+    this._cardArr = this._listData.cards;
   }
 
   render() {
     this._renderNewButton();
+    this._renderStorage();
   }
 
-  renderCards() {
-    this._listData.cards.forEach((cardData) => {
+  _renderNewButton() {
+    this._newButton.onNewButtonClick(() => {
+      Util.hideButton(this._newButton.getElement());
+      const cardID = Util.setIndex(this._cardArr.length);
+      this._createBlock(cardID, ``);
+    });
+    this._listElement.append(this._newButton.getElement());
+  }
+
+  _renderStorage() {
+    this._cardArr.forEach((cardData) => {
       const card = new TaskCard(cardData.cardID, cardData.cardText);
       card.onEditButoonClick((evt) => {
         const innerText = evt.target.nextElementSibling.textContent;
@@ -25,18 +36,10 @@ export default class ListController {
         this._createBlock(cardData.cardID, innerText);
       });
       card.onMouseDown((evtdown) => {
-        Util.moveElement(evtdown, card, this._listElement);
+        Util.moveElement(evtdown, card, this._listElement, this._cardArr);
       });
       this._listElement.insertBefore(card.getElement(), this._listElement.lastChild);
     });
-  }
-
-  _renderNewButton() {
-    this._newButton.onNewButtonClick(() => {
-      Util.hideButton(this._newButton.getElement());
-      this._createBlock(this._cardAmount, ``);
-    });
-    this._listElement.append(this._newButton.getElement());
   }
 
   _createBlock(cardID, previousInput) {
@@ -46,7 +49,10 @@ export default class ListController {
       if (!userInput) {
         this._resetBlock();
       } else {
+        this._listData.editCardInlocalDATA(cardID, userInput);
         this._createCard(cardID, userInput);
+        this._resetBlock();
+        this._cardAmount += 1;
       }
     });
 
@@ -56,6 +62,8 @@ export default class ListController {
       } else {
         const userInput = Util.getPreviousInput(this._listElement, `.user-card-input`);
         this._createCard(cardID, userInput);
+        this._resetBlock();
+        this._cardAmount += 1;
       }
     });
 
@@ -63,17 +71,24 @@ export default class ListController {
       if (!previousInput) {
         this._resetBlock();
       } else {
+        this._cardArr.splice(cardID, 1);
+        Util.resetIndex(this._cardArr);
         this._listData.deleteCardFromLocalDATA(cardID);
+        Util.resetCardStorage(this._listData.listID, this._cardArr);
+        Util.resetNodeIndex(this._listElement.querySelectorAll(`.card`));
         this._resetBlock();
         this._cardAmount -= 1;
       }
     });
 
-    this._listElement.insertBefore(block.getElement(), this._listElement.lastChild);
+    if (cardID + 1 === this._cardArr.length) {
+      this._listElement.insertBefore(block.getElement(), this._listElement.lastChild);
+    } else {
+      this._listElement.insertBefore(block.getElement(), this._listElement.querySelector(`.card--${cardID + 1}`));
+    }
   }
 
   _createCard(cardID, userInput) {
-    this._listData.editCardInlocalDATA(cardID, userInput);
     const card = new TaskCard(cardID, userInput);
     card.onEditButoonClick((evt) => {
       const innerText = evt.target.nextElementSibling.textContent;
@@ -85,9 +100,17 @@ export default class ListController {
       Util.moveElement(evtdown, card, this._listElement);
     });
 
-    this._resetBlock();
-    this._cardAmount += 1;
-    this._listElement.insertBefore(card.getElement(), this._listElement.lastChild);
+    if (!this._cardArr.some((cardData) => {
+      return cardData.cardID === cardID;
+    })) {
+      this._cardArr.push({ cardID, userInput });
+    }
+
+    if (cardID + 1 === this._cardArr.length) {
+      this._listElement.insertBefore(card.getElement(), this._listElement.querySelector(`.button--new`));
+    } else {
+      this._listElement.insertBefore(card.getElement(), this._listElement.querySelector(`.card--${cardID + 1}`));
+    }
   }
 
   _resetBlock() {
