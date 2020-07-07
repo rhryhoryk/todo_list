@@ -37,7 +37,7 @@ export default class Util {
 
   static resetIndex(arr) {
     arr.forEach((el, index) => {
-      if (el.listID) {
+      if (Object.prototype.hasOwnProperty.call(el, `listID`)) {
         el.listID = index;
       } else {
         el.cardID = index;
@@ -147,7 +147,6 @@ export default class Util {
           parent.insertBefore(replaced, elements[index]);
           [elements[index].id, elements[index + 1].id] = [elements[index + 1].id, elements[index].id];
           [dataArr[index], dataArr[index + 1]] = [dataArr[index + 1], dataArr[index]];
-          // ? ресет индекс проблема с нулем
           this.resetIndex(dataArr);
           const parentID = elements[index].parentElement.id;
           changeStorage(parentID);
@@ -163,7 +162,6 @@ export default class Util {
           elements[index].after(replaced);
           [elements[index].id, elements[index - 1].id] = [elements[index - 1].id, elements[index].id];
           [dataArr[index], dataArr[index - 1]] = [dataArr[index - 1], dataArr[index]];
-          // ? ресет индекс проблема с нулем
           this.resetIndex(dataArr);
           const parentID = elements[index].parentElement.id;
           changeStorage(parentID);
